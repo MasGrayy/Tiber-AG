@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Ageng Prayogo - Taekwondo Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Animated Background -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <main class="container">
+    <section class="profile-card" id="profileCard">
+      <!-- Avatar & Info -->
+      <div class="profile-header">
+        <div class="avatar-wrapper">
+          <div class="avatar-ring"></div>
+          <img 
+            src="ag.jpg" 
+            alt="Logo Ageng Prayogo Taekwondo Club" 
+            class="avatar-img" 
+            id="avatarPreview"
+          >
+        </div>
+        <h1 class="profile-name" id="displayName">Ageng Prayogo</h1>
+        <p class="profile-role" id="displayRole">Website Taekwondo Ageng Prayogo</p>
+        <p class="profile-bio" id="displayBio">
+          Menjadikan Atlet Taekwondo yang berakhlak
+        </p>
+      </div>
+
+      <!-- Tombol Utama -->
+      <div class="links-section">
+        <!-- Form Submit 1: Link Data Diri Atlet -->
+        <form id="formLink1" action="https://forms.gle/jLBjLbBpkVxGVbjj6" method="get" target="_blank" class="link-form">
+          <button type="submit" class="submit-btn btn-primary" id="btnSubmit1">
+            <span class="btn-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </span>
+            <span class="btn-content">
+              <span class="btn-title" id="btn1Label">Link Data Diri Atlet</span>
+              <span class="btn-domain" id="btn1Domain">Isi Formulir Data Atlet</span>
+            </span>
+            <span class="btn-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </span>
+          </button>
+        </form>
+
+        <!-- Tombol 2: Buka Pencarian Data Atlet (Hanya Tampil yang Dicari) -->
+        <div class="link-form">
+          <button type="button" class="submit-btn btn-secondary" id="openSearchModalBtn">
+            <span class="btn-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <span class="btn-content">
+              <span class="btn-title" id="btn2Label">Lihat Data Atlet</span>
+              <span class="btn-domain" id="btn2Domain">Cari Nama Atlet untuk Melihat Data</span>
+            </span>
+            <span class="btn-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="card-footer">
+        <button type="button" class="copy-btn" id="copyProfileBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span id="copyBtnText">Salin Info Profil</span>
+        </button>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Modal Pencarian Data Atlet (Hanya Menampilkan Data yang Dicari) -->
+  <div class="modal-backdrop" id="searchModal" aria-hidden="true">
+    <div class="modal-box search-modal-box">
+      <div class="modal-header">
+        <h2>Cari Data Atlet</h2>
+        <button type="button" class="close-modal" id="closeSearchModalBtn" aria-label="Tutup">&times;</button>
+      </div>
+      <p class="search-hint">Ketik nama lengkap atau kata kunci atlet yang ingin dilihat. Data lain tidak akan ditampilkan.</p>
+      
+      <form id="athleteSearchForm" class="search-form">
+        <div class="search-input-group">
+          <input 
+            type="text" 
+            id="athleteSearchInput" 
+            placeholder="Masukkan nama atlet..." 
+            autocomplete="off"
+            required
+          >
+          <button type="submit" class="btn-search-submit">Cari</button>
+        </div>
+      </form>
+
+      <!-- Status Loading / Error -->
+      <div id="searchStatus" class="search-status" style="display: none;"></div>
+
+      <!-- Kontainer Hasil Pencarian (Hidden secara default sampai dicari) -->
+      <div id="athleteSearchResults" class="search-results" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Info disalin!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
